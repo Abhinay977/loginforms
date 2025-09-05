@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sign Up Page</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background: linear-gradient(135deg, #1e1b4b, #312e81, #4338ca);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .signup-wrapper {
+      background: rgba(17, 24, 39, 0.85);
+      backdrop-filter: blur(14px);
+      border-radius: 20px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+      width: 100%;
+      max-width: 450px;
+      padding: 40px 34px;
+      color: #e5e7eb;
+      animation: fadeUp 0.8s ease-in-out;
+      border: 1px solid rgba(99, 102, 241, 0.4);
+    }
+
+    h1 {
+      text-align: center;
+      font-weight: 800;
+      font-size: 2rem;
+      background: linear-gradient(to right, #f59e0b, #ef4444, #6366f1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 30px;
+      letter-spacing: 2px;
+      animation: glow 2s infinite alternate;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: #c7d2fe;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+      width: 100%;
+      padding: 12px 16px;
+      font-size: 1rem;
+      border-radius: 10px;
+      border: 2px solid transparent;
+      background: rgba(255, 255, 255, 0.08);
+      color: #f9fafb;
+      transition: all 0.3s ease;
+    }
+
+    input::placeholder {
+      color: #9ca3af;
+    }
+
+    input:focus {
+      border-color: #818cf8;
+      outline: none;
+      box-shadow: 0 0 16px rgba(129, 140, 248, 0.7);
+      transform: scale(1.02);
+    }
+
+    .reload-btn {
+      background: linear-gradient(135deg, #4338ca, #6d28d9);
+      border: none;
+      padding: 10px;
+      border-radius: 10px;
+      color: white;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: transform 0.3s ease, background 0.3s ease;
+    }
+
+    .reload-btn:hover {
+      transform: rotate(360deg) scale(1.1);
+      background: linear-gradient(135deg, #6d28d9, #4f46e5);
+    }
+
+    .captcha-container {
+      margin: 20px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .captcha-value {
+      font-weight: 700;
+      font-size: 1.3rem;
+      background: rgba(99, 102, 241, 0.2);
+      border-radius: 12px;
+      padding: 12px;
+      text-align: center;
+      letter-spacing: 4px;
+      user-select: none;
+      font-family: monospace;
+      color: #e0e7ff;
+      box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.6);
+      width: 180px;
+      animation: pulseGlow 2s infinite;
+    }
+
+    .btn-signup {
+      display: block;
+      width: 100%;
+      background: linear-gradient(to right, #f59e0b, #ef4444, #8b5cf6);
+      color: white;
+      padding: 14px 0;
+      font-weight: 700;
+      border-radius: 12px;
+      margin-top: 25px;
+      letter-spacing: 2px;
+      cursor: pointer;
+      font-size: 1.1rem;
+      transition: transform 0.3s ease, box-shadow 0.4s ease;
+    }
+
+    .btn-signup:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+    }
+
+    .bottom-links {
+      margin-top: 24px;
+      text-align: center;
+      font-size: 0.95rem;
+      color: #fbbf24;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    .bottom-links span:hover {
+      text-decoration: underline;
+      color: #fff;
+    }
+
+    @media (max-width: 480px) {
+      .captcha-value {
+        width: 100%;
+        font-size: 1.1rem;
+      }
+      .signup-wrapper {
+        padding: 30px 20px;
+      }
+    }
+
+    @keyframes fadeUp {
+      from {opacity: 0; transform: translateY(40px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    @keyframes glow {
+      from {text-shadow: 0 0 6px rgba(249, 115, 22, 0.6);}
+      to {text-shadow: 0 0 18px rgba(99, 102, 241, 0.9);}
+    }
+
+    @keyframes pulseGlow {
+      0% {box-shadow: 0 0 8px rgba(99, 102, 241, 0.5);}
+      50% {box-shadow: 0 0 20px rgba(99, 102, 241, 0.9);}
+      100% {box-shadow: 0 0 8px rgba(99, 102, 241, 0.5);}
+    }
+  </style>
+</head>
+<body>
+  <main class="signup-wrapper" role="main" aria-label="signup form">
+    <h1>Create Your Account</h1>
+    <form id="signupForm" novalidate>
+      <div class="mb-4">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" autocomplete="name" required placeholder="Enter your full name" />
+      </div>
+
+      <div class="mb-4">
+        <label for="mobile">Mobile No.:</label>
+        <input type="text" id="mobile" name="mobile" autocomplete="tel" required pattern="[0-9]{10}" placeholder="Enter 10 digit mobile number" />
+      </div>
+
+      <div class="mb-4">
+        <label for="email">Email Id:</label>
+        <input type="email" id="email" name="email" autocomplete="email" required placeholder="Enter your email address" />
+      </div>
+
+      <div class="mb-4">
+        <label for="newpassword">New Password:</label>
+        <input type="password" id="newpassword" name="newpassword" required placeholder="Create a password" />
+      </div>
+
+      <div class="mb-4 flex gap-3 items-center">
+        <div class="flex-grow">
+          <label for="retypepassword">Re-type Password:</label>
+          <input type="password" id="retypepassword" name="retypepassword" required placeholder="Re-enter the password" />
+        </div>
+        <button type="button" class="reload-btn" id="reloadCaptchaBtn" title="Reload Captcha">&#x21bb;</button>
+      </div>
+
+      <div class="captcha-container">
+        <label for="captchaInput">Captcha:</label>
+        <div id="captchaValue" class="captcha-value"></div>
+        <input type="text" id="captchaInput" name="captchaInput" required placeholder="Enter captcha text here" autocomplete="off" />
+      </div>
+
+      <button type="submit" class="btn-signup">SIGN UP</button>
+    </form>
+    <nav class="bottom-links" aria-label="Account options">
+      <span id="signInLink" role="link" tabindex="0">Already Have An Account? Sign In</span>
+    </nav>
+  </main>
+
+  <script>
+    // Generate random captcha
+    function generateCaptcha() {
+      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+      let captcha = '';
+      for (let i = 0; i < 6; i++) {
+        captcha += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+      return captcha;
+    }
+
+    const captchaValueElement = document.getElementById('captchaValue');
+    const reloadCaptchaBtn = document.getElementById('reloadCaptchaBtn');
+    const form = document.getElementById('signupForm');
+    let currentCaptcha = '';
+
+    function setCaptcha() {
+      currentCaptcha = generateCaptcha();
+      captchaValueElement.textContent = currentCaptcha;
+    }
+
+    setCaptcha();
+
+    reloadCaptchaBtn.addEventListener('click', () => {
+      setCaptcha();
+      document.getElementById('captchaInput').value = '';
+      document.getElementById('captchaInput').focus();
+    });
+
+    // Form validation
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+
+      const name = form.name.value.trim();
+      const mobile = form.mobile.value.trim();
+      const email = form.email.value.trim();
+      const newpassword = form.newpassword.value;
+      const retypepassword = form.retypepassword.value;
+      const captchaInput = form.captchaInput.value.trim();
+
+      let errors = [];
+
+      if (name.length < 3) {
+        errors.push('Name must be at least 3 characters long.');
+      }
+
+      if (!/^\d{10}$/.test(mobile)) {
+        errors.push('Mobile Number must be exactly 10 digits.');
+      }
+
+      if (email === '') {
+        errors.push('Email is required.');
+      }
+
+      if (newpassword.length < 6) {
+        errors.push('Password must be at least 6 characters.');
+      }
+
+      if (newpassword !== retypepassword) {
+        errors.push('Passwords do not match.');
+      }
+
+      if (captchaInput !== currentCaptcha) {
+        errors.push('Captcha does not match.');
+      }
+
+      if (errors.length > 0) {
+        alert('Please fix the following errors:\n- ' + errors.join('\n- '));
+        return;
+      }
+
+      alert('Signup Successful! Welcome, ' + name + '.');
+      form.reset();
+      setCaptcha();
+    });
+
+    // Navigation (redirect to Sign In page)
+    document.getElementById('signInLink').addEventListener('click', () => {
+      window.location.href = "Sign In.html";
+    });
+
+    // Accessibility for keyboard users
+    document.querySelectorAll('.bottom-links span').forEach(el => {
+      el.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          el.click();
+        }
+      });
+    });
+  </script>
+</body>
+</html>
